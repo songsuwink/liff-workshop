@@ -41,15 +41,23 @@
 
     <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
     <script>
-      function createUniversalLink() {}
+      function createUniversalLink() {
+        const link1 = liff.permanentLink.createUrl();
+        document.getElementById("universalLink1").append(link1);
+        
+        liff.permanentLink.setExtraQueryParam("param=9&id=5");
+
+        const link2 = liff.permanentLink.createUrl();
+        document.getElementById("universalLink2").append(link2);
+      }
 
       async function shareMsg() {
         await liff.shareTargetPicker([
           {
-            "type": "text",
-            "text": "This message was sent by Share Target Picker"
-          }
-        ])
+            type: "text",
+            text: "This message was sent by Share Target Picker",
+          },
+        ]);
       }
 
       function logOut() {
@@ -82,9 +90,9 @@
         if (liff.getContext().type !== "none") {
           await liff.sendMessages([
             {
-              type: "sticker",
-              stickerId: 1,
-              packageId: 1,
+              "type": "sticker",
+              "stickerId": 1,
+              "packageId": 1,
             },
           ]);
           alert("Message Sent");
@@ -134,7 +142,7 @@
           getUserProfile();
           getContext();
           getFriendship();
-          // createUniversalLink()
+          createUniversalLink();
         } else {
           liff.login();
         }
